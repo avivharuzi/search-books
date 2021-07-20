@@ -10,6 +10,11 @@ const routes: Routes = [
     component: CoreComponent,
     children: [
       { path: '', component: HomeComponent },
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./features/auth/auth.module').then(m => m.AuthModule),
+      },
       { path: '', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '' },
     ],
