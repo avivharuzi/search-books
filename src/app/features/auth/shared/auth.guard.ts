@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  CanActivateChild,
   Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { AppState } from '../../../store/app.reducer';
 import { authSelectors } from '../store/auth.selectors';
@@ -17,7 +16,7 @@ import { authSelectors } from '../store/auth.selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   canActivate(
@@ -38,16 +37,5 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         return of(true);
       })
     );
-  }
-
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return this.canActivate(childRoute, state);
   }
 }

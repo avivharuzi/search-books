@@ -1,24 +1,28 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { CoreComponent } from './core/core.component';
-import { HomeComponent } from './core/components/home/home.component';
+import { AuthGuard } from './features/auth/shared/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CoreComponent,
-    children: [
-      { path: '', component: HomeComponent },
-      {
-        path: 'auth',
-        loadChildren: () =>
-          import('./features/auth/auth.module').then(m => m.AuthModule),
-      },
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '**', redirectTo: '' },
-    ],
+    path: 'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'search',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./features/search/search.module').then(m => m.SearchModule),
+  },
+  {
+    path: 'wishlist',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./features/wishlist/wishlist.module').then(m => m.WishlistModule),
+  },
+  { path: '', redirectTo: 'search', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

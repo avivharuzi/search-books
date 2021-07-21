@@ -18,8 +18,8 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {
     this.loginForm = formBuilder.group({
       username: ['', [Validators.required]],
