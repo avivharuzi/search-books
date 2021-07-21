@@ -1,1 +1,25 @@
-<router-outlet></router-outlet>
+<ng-container>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <span class="appTitle" routerLink="/">search-books</span>
+          <ng-container *ngIf="user$ | async as user">
+            <div>
+              <a class="mx-3" mat-raised-button routerLink="/search">Search</a>
+              <a class="mx-3" mat-raised-button routerLink="/wishlist"
+                >Wishlist
+              </a>
+            </div>
+            <div>
+              <span>Welcome, {{ user.username }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="container py-5">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>

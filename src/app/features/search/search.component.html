@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="mb-4">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input
+        #search
+        (input)="onInput(search.value)"
+        matInput
+        placeholder="Search books..."
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <ng-container *ngIf="books$ | async as books">
+    <ng-container *ngIf="books.items && books.items.length > 0">
+      <app-book-list [books]="books.items"></app-book-list>
+      <mat-paginator [length]="books.totalItems"
+                     [pageSize]="20"
+                     [hidePageSize]="true"
+                     [pageIndex]="(querySubject | async)?.pageIndex || 0"
+                     (page)="onPage(search.value, $event)">
+      </mat-paginator>
+    </ng-container>
+  </ng-container>
+</div>
