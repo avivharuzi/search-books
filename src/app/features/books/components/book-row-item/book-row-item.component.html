@@ -1,0 +1,19 @@
+<div
+  class="d-flex flex-row justify-content-between align-items-center"
+  *ngIf="book"
+>
+  <div class="d-flex align-items-center">
+    <img
+      class="me-5"
+      [src]="book.volumeInfo.imageLinks?.thumbnail"
+      [alt]="book.volumeInfo.title + ' - Cover Image'"
+    />
+    <div class="me-5">
+      <h3>{{ book.volumeInfo.title }}</h3>
+      <h4 class="text-muted">{{ book.volumeInfo.subtitle }}</h4>
+    </div>
+  </div>
+  <div>
+    <p class="text-muted">{{ book.volumeInfo.publishedDate | date }}</p>
+  </div>
+</div>

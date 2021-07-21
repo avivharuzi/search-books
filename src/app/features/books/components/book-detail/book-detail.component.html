@@ -1,0 +1,44 @@
+<div *ngIf="book">
+  <div class="d-flex justify-content-between mb-5">
+    <div class="me-5">
+      <h1 class="mb-3">{{ book.volumeInfo.title }}</h1>
+      <h2 *ngIf="book.volumeInfo.subtitle" class="mb-4">
+        {{ book.volumeInfo.subtitle }}
+      </h2>
+      <p class="text-muted mb-4" *ngIf="book.volumeInfo.publishedDate">
+        {{ book.volumeInfo.publishedDate }}
+      </p>
+      <div
+        class="mb-5"
+        *ngIf="
+          book.volumeInfo.categories && book.volumeInfo.categories.length > 0
+        "
+      >
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let category of book.volumeInfo.categories"
+            selected
+          >
+            {{ category }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div>
+      <img
+        [src]="book.volumeInfo.imageLinks?.thumbnail"
+        [alt]="book.volumeInfo.title + ' - Cover Image'"
+      />
+    </div>
+  </div>
+  <p *ngIf="book.volumeInfo.description" class="mb-4">
+    {{ book.volumeInfo.description }}
+  </p>
+  <ng-container
+    *ngIf="book.volumeInfo.authors && book.volumeInfo.authors.length > 0"
+  >
+    <p *ngFor="let author of book.volumeInfo.authors">
+      <strong>{{ author }} </strong>
+    </p>
+  </ng-container>
+</div>

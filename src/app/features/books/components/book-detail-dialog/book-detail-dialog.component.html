@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <div class="container">
+    <app-book-detail [book]="data.book"></app-book-detail>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    (click)="addToWishlist()"
+    cdkFocusInitial
+  >
+    Add to Wishlist
+  </button>
+</mat-dialog-actions>

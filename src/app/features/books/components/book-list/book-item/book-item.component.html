@@ -1,0 +1,16 @@
+<div class="text-center" *ngIf="book" (click)="openDialog()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+      <mat-card-subtitle>{{ book.volumeInfo.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="p-4">
+      <strong>{{ book.volumeInfo.publishedDate | date }}</strong>
+    </div>
+    <img
+      mat-card-image
+      [src]="book.volumeInfo.imageLinks?.thumbnail"
+      [alt]="book.volumeInfo.title + ' - Cover Image'"
+    />
+  </mat-card>
+</div>
